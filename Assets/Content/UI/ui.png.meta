@@ -161,10 +161,10 @@ TextureImporter:
       name: milk
       rect:
         serializedVersion: 2
-        x: 11
-        y: 8
-        width: 5
-        height: 8
+        x: 13
+        y: 11
+        width: 3
+        height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,13 +179,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: coffee
+      name: spoon
       rect:
         serializedVersion: 2
-        x: 8
-        y: 1
-        width: 8
-        height: 7
+        x: 11
+        y: 8
+        width: 5
+        height: 2
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +193,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa8ed710966e64f46a5c01486b153100
-      internalID: 680639842
+      spriteID: c7b391aa1fa81d94690bf112827125b8
+      internalID: -1028711189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spoon2
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 6
+        height: 6
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad4e29975736c6048b50d9049b617a93
+      internalID: -1440926946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spoon3
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 2
+        width: 3
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd97bba30d346fa4681844b9d6f60f6a
+      internalID: -2036057169
       vertices: []
       indices: 
       edges: []
@@ -212,7 +254,10 @@ TextureImporter:
     nameFileIdTable:
       pixel: -1764666325
       cup: 1662863149
+      spoon2: -1440926946
       pause: -509632977
+      spoon: -1028711189
+      spoon3: -2036057169
       milk: 1335119921
       coffee: 680639842
   spritePackingTag: 

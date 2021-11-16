@@ -10,6 +10,8 @@ namespace HackedDesign
         private float movement;
         private float facing;
         private bool duck;
+        private bool attack;
+
         [SerializeField] private Animator animator;
         [SerializeField] private Animator slashAnimator;
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -17,6 +19,11 @@ namespace HackedDesign
 
         [Header("Settings")]
         [SerializeField] private PlayerSettings settings;
+        [SerializeField] private LayerMask layerMask;
+
+        private float slashTime = 0;
+
+
 
         void Awake()
         {
@@ -61,7 +68,7 @@ namespace HackedDesign
         {
             if (Game.Instance.State.Playing)
             {
-                slashAnimator.SetBool("slash", true);
+                attack = true;
             }
         }
 
@@ -74,15 +81,47 @@ namespace HackedDesign
         // Update is called once per frame
         public void UpdateBehaviour()
         {
-            
+
             UpdateDuck();
+            Attack();
             Animate();
+
         }
 
         public void FixedUpdateBehaviour()
         {
             Movement();
             slashAnimator.SetBool("slash", false);
+        }
+
+        private void Attack()
+        {
+            if (attack && Time.time > slashTime)
+            {
+                slashTime = Time.time + settings.slashTimer;
+                //Debug.Log("Attack");
+                slashAnimator.SetBool("slash", true);
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + new Vector3(0, 1.5f, 0), transform.right, settings.slashDistance);
+                Debug.DrawRay(transform.position + new Vector3(0, 1.5f, 0), transform.right, Color.red, 0.5f);
+
+                foreach (var hit in hits)
+                {
+                    if (hit.collider.CompareTag("Enemy"))
+                    {
+                        Debug.Log(hit.collider.name);
+                        hit.collider.GetComponent<Enemy>().Hit();
+                        hit.collider.attachedRigidbody.AddForce(new Vector2(transform.right.x, transform.right.y) * settings.slashForce, ForceMode2D.Force);
+                    }
+                }
+
+                // if(hit.collider != null)
+                // {
+                //     Debug.Log(hit.collider.name);
+                // }
+
+
+            }
+            attack = false;
         }
 
         private void UpdateDuck()
@@ -103,7 +142,7 @@ namespace HackedDesign
 
         private void Animate()
         {
-            
+
             animator.SetFloat("speed", duck ? 0 : Mathf.Abs(movement));
             animator.SetBool("duck", duck);
         }
