@@ -78,6 +78,16 @@ namespace HackedDesign
             transform.rotation = Quaternion.identity;
         }
 
+        public void Hit(float amount)
+        {
+            Game.Instance.Data.Will -= amount;
+
+            if(Game.Instance.Data.Will <= 0)   
+            {
+                Game.Instance.SetGameOver();
+            }
+        }
+
         // Update is called once per frame
         public void UpdateBehaviour()
         {
@@ -108,8 +118,8 @@ namespace HackedDesign
                 {
                     if (hit.collider.CompareTag("Enemy"))
                     {
-                        Debug.Log(hit.collider.name);
-                        hit.collider.GetComponent<Enemy>().Hit();
+                        //Debug.Log(hit.collider.name);
+                        hit.collider.GetComponent<Enemy>().Hit(settings.slashDamage);
                         hit.collider.attachedRigidbody.AddForce(new Vector2(transform.right.x, transform.right.y) * settings.slashForce, ForceMode2D.Force);
                     }
                 }

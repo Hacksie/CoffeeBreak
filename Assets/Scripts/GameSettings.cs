@@ -11,6 +11,8 @@ namespace HackedDesign
         [Header("Game Play")]
         public float gameLength = 480.0f;
         public float maxWill = 100;
+        public float kittyTimer = 2.0f;
+        
         public string[] tasks = {
             "Obtain coffee",
             "Grind coffee",

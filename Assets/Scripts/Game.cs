@@ -42,6 +42,7 @@ namespace HackedDesign
 
         public PlayerController Player { get { return player; } private set { player = value; } }
         public GameData Data { get { return gameData; } private set { gameData = value; }}
+        public GameSettings Settings { get { return gameSettings; } private set { gameSettings = value; }}
 
         Game()
         {

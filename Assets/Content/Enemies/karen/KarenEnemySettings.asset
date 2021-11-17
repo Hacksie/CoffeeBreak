@@ -18,3 +18,8 @@ MonoBehaviour:
   duckColliderSize: {x: 1, y: 2}
   duckColliderOffset: {x: 0, y: 1}
   slashForce: 25
+  maxHealth: 25
+  slashDelay: 0.8
+  slashDistance: 1.4
+  slashTimer: 1
+  slashDamage: 10

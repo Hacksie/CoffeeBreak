@@ -14,7 +14,11 @@ namespace HackedDesign
         public Vector2 duckColliderSize = new Vector2(1, 2);
         public Vector2 duckColliderOffset = new Vector2(0, 1.0f);
         public float slashForce = 25.0f;
-        public int maxHits = 3;
+        public int maxHealth = 25;
+        public float slashDelay = 0.2f;
+        public float slashDistance = 1.4f;
+        public float slashTimer = 1.0f;
+        public float slashDamage = 10;
 
     }
 }

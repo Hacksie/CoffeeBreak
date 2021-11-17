@@ -16,6 +16,8 @@ namespace HackedDesign
         public float slashForce = 2000.0f;
         public float slashDistance = 1.5f;
         public float slashTimer = 0.33f;
+        public float slashDamage = 10.0f;
+        
 
     }
 }

@@ -15,11 +15,13 @@ namespace HackedDesign
         [SerializeField] private EnemySettings settings;
 
         private float movement = 0.0f;
-        private float hits;
+        private float health;
+        private float slashTime = 0;
+        private bool attack = false;
 
         void Awake()
         {
-            hits = settings.maxHits;
+            health = settings.maxHealth;
             if (animator == null)
             {
                 animator = GetComponent<Animator>();
@@ -36,16 +38,17 @@ namespace HackedDesign
             }
 
             Reset();
-        }      
+        }
 
         private void Reset()
         {
 
-        }  
+        }
 
         public void Update()
         {
             UpdateFacing();
+            Attack();
             Animate();
         }
 
@@ -54,10 +57,11 @@ namespace HackedDesign
             Movement();
         }
 
-        public void Hit()
+        public void Hit(float damage)
         {
-            hits--;
-            if(hits <= 0)   
+            health -= damage;
+            attack = false;
+            if (health <= 0)
             {
                 Destroy(gameObject);
             }
@@ -75,11 +79,73 @@ namespace HackedDesign
             rigidbody.MovePosition(newPosition);
         }
 
+        private void Attack()
+        {
+            if (!attack && Time.time > slashTime) // Check for slash
+            {
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + new Vector3(0, 1.5f, 0), transform.right, settings.slashDistance);
+                /// FIXME: Linq
+                foreach (var hit in hits)
+                {
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        attack = true;
+                        slashTime = Time.time + settings.slashDelay;
+                        Debug.Log("Attack, starting delay");
+                    }
+
+                    /*
+                    if (Time.time > slashTime)
+                    {
+                        slashTime = Time.time + settings.slashTimer;
+                        //Debug.Log("Attack");
+                        slashAnimator.SetBool("slash", true);
+                        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + new Vector3(0, 1.5f, 0), transform.right, settings.slashDistance);
+                        Debug.DrawRay(transform.position + new Vector3(0, 1.5f, 0), transform.right, Color.red, 0.5f);
+
+                        foreach (var hit in hits)
+                        {
+                            if (hit.collider.CompareTag("Enemy"))
+                            {
+                                //Debug.Log(hit.collider.name);
+                                hit.collider.GetComponent<Enemy>().Hit(settings.slashDamage);
+                                hit.collider.attachedRigidbody.AddForce(new Vector2(transform.right.x, transform.right.y) * settings.slashForce, ForceMode2D.Force);
+                            }
+                        }
+
+                        // if(hit.collider != null)
+                        // {
+                        //     Debug.Log(hit.collider.name);
+                        // }
+
+
+                    }*/
+                }
+            }
+
+            if(attack && Time.time > slashTime) // Delay over, try and attack
+            {
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position + new Vector3(0, 1.5f, 0), transform.right, settings.slashDistance);
+
+                foreach (var hit in hits)
+                {
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        Debug.Log("Attack player");
+                        Game.Instance.Player.Hit(settings.slashDamage);
+                        attack = false;
+                        slashTime = Time.time + settings.slashTimer;
+                    }
+                }
+            }
+            // else delaying
+        }
+
         private void Animate()
         {
 
             animator.SetFloat("speed", 1);
             animator.SetBool("duck", false);
-        }        
+        }
     }
 }

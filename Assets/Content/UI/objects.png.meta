@@ -161,27 +161,6 @@ TextureImporter:
       name: spoon1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 5
-        height: 8
-      alignment: 6
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c2dbebcac4c7e1749abcd56892762ece
-      internalID: 1685972204
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spoon2
-      rect:
-        serializedVersion: 2
         x: 5
         y: 5
         width: 9
@@ -210,8 +189,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spoon2: -1442176414
-      spoon1: 1685972204
+      spoon1: -1442176414
       milk: 851946745
       coffee: 686906608
   spritePackingTag: 
